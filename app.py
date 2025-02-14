@@ -127,10 +127,22 @@ sellers_df['seller_state'] = sellers_df['seller_state'].astype('string')
 
 # Sidebar for navigation
 st.sidebar.title("Navigasi")
-section = st.sidebar.radio("Pilih Section", ["Preprocessing Data", "Analisis Deskriptif", "Analisis Lanjutan", "Geoanalisis", "Prediksi", "Kesimpulan"])
+section = st.sidebar.radio("Pilih Section", ["Kelompok", "Preprocessing Data", "Analisis Deskriptif", "Analisis Lanjutan", "Geoanalisis", "Prediksi", "Kesimpulan"])
+
+if section == "Kelompok":
+    st.markdown("## Kelompok : IF 12 - 10123901")
+    st.markdown("""
+    - Anggota : 
+        10123901 - Riksa Paradila Pasa
+        10123907 - M. Nathan Fadhilah
+        10123906 - M. Faishal R
+        10123914 - Dimas Nurfauzi
+        10123909 - Andi Tegar P
+        10123455 - Naufal Fauzan R
+    """)
 
 # Exploratory Data Analysis (EDA)
-if section == "EDA":
+elif section == "Preprocessing Data":
 
     # Preprocessing
     st.markdown("## 1. Preprocessing Data")
