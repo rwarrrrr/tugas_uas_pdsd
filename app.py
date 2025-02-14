@@ -127,7 +127,7 @@ sellers_df['seller_state'] = sellers_df['seller_state'].astype('string')
 
 # Sidebar for navigation
 st.sidebar.title("Navigasi")
-section = st.sidebar.radio("Pilih Section", ["EDA", "Analisis Deskriptif", "Analisis Lanjutan", "Geoanalisis", "Prediksi", "Kesimpulan"])
+section = st.sidebar.radio("Pilih Section", ["Preprocessing Data", "Analisis Deskriptif", "Analisis Lanjutan", "Geoanalisis", "Prediksi", "Kesimpulan"])
 
 # Exploratory Data Analysis (EDA)
 if section == "EDA":
