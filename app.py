@@ -298,32 +298,32 @@ elif section == "Analisis Lanjutan":
 elif section == "Geoanalisis":
     st.markdown("## 1. Distribusi Geografik Pelanggan")
 
-    geo_customers = customers_df.merge(geolocation_df, left_on='customer_zip_code_prefix', right_on='geolocation_zip_code_prefix')
-    geo_summary = geo_customers.groupby(['customer_state']).agg({'geolocation_lat': 'mean', 
-                                                                'geolocation_lng': 'mean', 
-                                                                'customer_unique_id': 'count'}).reset_index()
+    # geo_customers = customers_df.merge(geolocation_df, left_on='customer_zip_code_prefix', right_on='geolocation_zip_code_prefix')
+    # geo_summary = geo_customers.groupby(['customer_state']).agg({'geolocation_lat': 'mean', 
+    #                                                             'geolocation_lng': 'mean', 
+    #                                                             'customer_unique_id': 'count'}).reset_index()
 
-    state_mapping = {
-        "AC": "Acre", "AL": "Alagoas", "AP": "Amapá", "AM": "Amazonas", "BA": "Bahia",
-        "CE": "Ceará", "DF": "Distrito Federal", "ES": "Espírito Santo", "GO": "Goiás",
-        "MA": "Maranhão", "MT": "Mato Grosso", "MS": "Mato Grosso do Sul", "MG": "Minas Gerais",
-        "PA": "Pará", "PB": "Paraíba", "PR": "Paraná", "PE": "Pernambuco", "PI": "Piauí",
-        "RJ": "Rio de Janeiro", "RN": "Rio Grande do Norte", "RS": "Rio Grande do Sul",
-        "RO": "Rondônia", "RR": "Roraima", "SC": "Santa Catarina", "SP": "São Paulo",
-        "SE": "Sergipe", "TO": "Tocantins"
-    }
-    geo_summary["customer_state"] = geo_summary["customer_state"].map(state_mapping)
-    fig_map = px.scatter_geo(geo_summary, 
-                            lat='geolocation_lat', 
-                            lon='geolocation_lng', 
-                            size='customer_unique_id', 
-                            hover_name='customer_state', 
-                            color_discrete_sequence=['blue'],
-                            size_max=50,)
-    st.plotly_chart(fig_map)
-    st.dataframe(geo_summary.nlargest(5, 'customer_unique_id'))
+    # state_mapping = {
+    #     "AC": "Acre", "AL": "Alagoas", "AP": "Amapá", "AM": "Amazonas", "BA": "Bahia",
+    #     "CE": "Ceará", "DF": "Distrito Federal", "ES": "Espírito Santo", "GO": "Goiás",
+    #     "MA": "Maranhão", "MT": "Mato Grosso", "MS": "Mato Grosso do Sul", "MG": "Minas Gerais",
+    #     "PA": "Pará", "PB": "Paraíba", "PR": "Paraná", "PE": "Pernambuco", "PI": "Piauí",
+    #     "RJ": "Rio de Janeiro", "RN": "Rio Grande do Norte", "RS": "Rio Grande do Sul",
+    #     "RO": "Rondônia", "RR": "Roraima", "SC": "Santa Catarina", "SP": "São Paulo",
+    #     "SE": "Sergipe", "TO": "Tocantins"
+    # }
+    # geo_summary["customer_state"] = geo_summary["customer_state"].map(state_mapping)
+    # fig_map = px.scatter_geo(geo_summary, 
+    #                         lat='geolocation_lat', 
+    #                         lon='geolocation_lng', 
+    #                         size='customer_unique_id', 
+    #                         hover_name='customer_state', 
+    #                         color_discrete_sequence=['blue'],
+    #                         size_max=50,)
+    # st.plotly_chart(fig_map)
+    # st.dataframe(geo_summary.nlargest(5, 'customer_unique_id'))
 
-    st.markdown("Visualisasi ini menunjukkan persebaran pelanggan berdasarkan **state** di peta.")
+    # st.markdown("Visualisasi ini menunjukkan persebaran pelanggan berdasarkan **state** di peta.")
 
 # Prediksi
 elif section == "Prediksi":
