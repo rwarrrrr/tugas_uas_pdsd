@@ -4,9 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
-from geopy.distance import geodesic
-from itertools import combinations
-from collections import Counter
+# from geopy.distance import geodesic
+# from itertools import combinations
+# from collections import Counter
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
