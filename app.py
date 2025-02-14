@@ -132,13 +132,13 @@ section = st.sidebar.radio("Pilih Section", ["Kelompok", "Preprocessing Data", "
 if section == "Kelompok":
     st.markdown("## Kelompok : IF 12 - 10123901")
     st.markdown("""
-    - Anggota : 
-        10123901 - Riksa Paradila Pasa
-        10123907 - M. Nathan Fadhilah
-        10123906 - M. Faishal R
-        10123914 - Dimas Nurfauzi
-        10123909 - Andi Tegar P
-        10123455 - Naufal Fauzan R
+    Anggota : 
+    -    10123901 - Riksa Paradila Pasa 
+    -    10123907 - M. Nathan Fadhilah
+    -    10123906 - M. Faishal R
+    -    10123914 - Dimas Nurfauzi
+    -    10123909 - Andi Tegar P
+    -    10123455 - Naufal Fauzan R
     """)
 
 # Exploratory Data Analysis (EDA)
