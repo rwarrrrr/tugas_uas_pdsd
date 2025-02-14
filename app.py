@@ -24,103 +24,78 @@ product_category_tl_df = pd.read_csv("product_category_name_translation.csv")
 products_df = pd.read_csv("products_dataset.csv")
 sellers_df = pd.read_csv("sellers_dataset.csv")
 
-#customers
-customers_df['customer_zip_code_prefix'] = pd.to_numeric(customers_df['customer_zip_code_prefix'], errors='coerce')
-customers_df['customer_zip_code_prefix'] = customers_df['customer_zip_code_prefix'].astype('Int64')
-customers_df['customer_city'] = customers_df['customer_city'].astype('string')
-customers_df['customer_state'] = customers_df['customer_state'].astype('string')
+# customers
+customers_df['customer_zip_code_prefix'] = pd.to_numeric(customers_df['customer_zip_code_prefix'], errors='coerce').fillna(0).astype('int64')
+customers_df['customer_city'] = customers_df['customer_city'].astype('str')
+customers_df['customer_state'] = customers_df['customer_state'].astype('str')
 
-#geolocation
-geolocation_df['geolocation_zip_code_prefix'] = pd.to_numeric(geolocation_df['geolocation_zip_code_prefix'], errors='coerce')
-geolocation_df['geolocation_zip_code_prefix'] = geolocation_df['geolocation_zip_code_prefix'].astype('Int64')
-geolocation_df['geolocation_lat'] = pd.to_numeric(geolocation_df['geolocation_lat'], errors='coerce')
-geolocation_df['geolocation_lat'] = geolocation_df['geolocation_lat'].astype('float64')
-geolocation_df['geolocation_lng'] = pd.to_numeric(geolocation_df['geolocation_lng'], errors='coerce')
-geolocation_df['geolocation_lng'] = geolocation_df['geolocation_lng'].astype('float64')
-geolocation_df['geolocation_city'] = geolocation_df['geolocation_city'].astype('string')
-geolocation_df['geolocation_state'] = geolocation_df['geolocation_state'].astype('string')
+# geolocation
+geolocation_df['geolocation_zip_code_prefix'] = pd.to_numeric(geolocation_df['geolocation_zip_code_prefix'], errors='coerce').fillna(0).astype('int64')
+geolocation_df['geolocation_lat'] = pd.to_numeric(geolocation_df['geolocation_lat'], errors='coerce').astype('float64')
+geolocation_df['geolocation_lng'] = pd.to_numeric(geolocation_df['geolocation_lng'], errors='coerce').astype('float64')
+geolocation_df['geolocation_city'] = geolocation_df['geolocation_city'].astype('str')
+geolocation_df['geolocation_state'] = geolocation_df['geolocation_state'].astype('str')
 
-#order items
+# order items
 order_items_df['shipping_limit_date'] = pd.to_datetime(order_items_df['shipping_limit_date'])
-order_items_df['price'] = pd.to_numeric(order_items_df['price'], errors='coerce')
-order_items_df['price'] = order_items_df['price'].astype('float64')
-order_items_df['freight_value'] = pd.to_numeric(order_items_df['freight_value'], errors='coerce')
-order_items_df['freight_value'] = order_items_df['freight_value'].astype('float64')
-# Menambahkan kolom profit (keuntungan) sebagai price dikurangi freight_value
+order_items_df['price'] = pd.to_numeric(order_items_df['price'], errors='coerce').astype('float64')
+order_items_df['freight_value'] = pd.to_numeric(order_items_df['freight_value'], errors='coerce').astype('float64')
 order_items_df['profit'] = order_items_df['price'] - order_items_df['freight_value']
 
-#order payments
-order_payments_df['payment_sequential'] = pd.to_numeric(order_payments_df['payment_sequential'], errors='coerce')
-order_payments_df['payment_sequential'] = order_payments_df['payment_sequential'].astype('Int64')
-order_payments_df['payment_type'] = order_payments_df['payment_type'].astype('string')
-order_payments_df['payment_installments'] = pd.to_numeric(order_payments_df['payment_installments'], errors='coerce')
-order_payments_df['payment_installments'] = order_payments_df['payment_installments'].astype('Int64')
-order_payments_df['payment_value'] = pd.to_numeric(order_payments_df['payment_value'], errors='coerce')
-order_payments_df['payment_value'] = order_payments_df['payment_value'].astype('float64')
+# order payments
+order_payments_df['payment_sequential'] = pd.to_numeric(order_payments_df['payment_sequential'], errors='coerce').fillna(0).astype('int64')
+order_payments_df['payment_type'] = order_payments_df['payment_type'].astype('str')
+order_payments_df['payment_installments'] = pd.to_numeric(order_payments_df['payment_installments'], errors='coerce').fillna(0).astype('int64')
+order_payments_df['payment_value'] = pd.to_numeric(order_payments_df['payment_value'], errors='coerce').astype('float64')
 
-#order review
-order_reviews_df['review_score'] = pd.to_numeric(order_reviews_df['review_score'], errors='coerce')
-order_reviews_df['review_score'] = order_reviews_df['review_score'].astype('Int64')
-order_reviews_df['review_comment_title'] = order_reviews_df['review_comment_title'].astype('string')
-order_reviews_df['review_comment_message'] = order_reviews_df['review_comment_message'].astype('string')
+# order review
+order_reviews_df['review_score'] = pd.to_numeric(order_reviews_df['review_score'], errors='coerce').fillna(0).astype('int64')
+order_reviews_df['review_comment_title'] = order_reviews_df['review_comment_title'].astype('str')
+order_reviews_df['review_comment_message'] = order_reviews_df['review_comment_message'].astype('str')
 order_reviews_df['review_creation_date'] = pd.to_datetime(order_reviews_df['review_creation_date'])
 order_reviews_df['review_answer_timestamp'] = pd.to_datetime(order_reviews_df['review_answer_timestamp'])
-# Mengisi kategori nama yang kosong menjadi 'Unknown'
 order_reviews_df['review_comment_title'] = order_reviews_df['review_comment_title'].fillna('Unknown')
 order_reviews_df['review_comment_message'] = order_reviews_df['review_comment_message'].fillna('Unknown')
 
-#orders
-orders_df['order_status'] = orders_df['order_status'].astype('string')
+# orders
+orders_df['order_status'] = orders_df['order_status'].astype('str')
 orders_df['order_purchase_timestamp'] = pd.to_datetime(orders_df['order_purchase_timestamp'])
 orders_df['order_approved_at'] = pd.to_datetime(orders_df['order_approved_at'])
 orders_df['order_delivered_carrier_date'] = pd.to_datetime(orders_df['order_delivered_carrier_date'])
 orders_df['order_delivered_customer_date'] = pd.to_datetime(orders_df['order_delivered_customer_date'])
 orders_df['order_estimated_delivery_date'] = pd.to_datetime(orders_df['order_estimated_delivery_date'])
-# Drop row yang punya nilai null
 orders_df.dropna(subset=['order_approved_at'], axis=0, inplace=True)
 orders_df = orders_df.dropna(subset=['order_purchase_timestamp'])
-# Reset index
 orders_df.reset_index(drop=True, inplace=True)
 customer_orders = orders_df.merge(customers_df, on='customer_id', how='left')
 customer_payments = customer_orders.merge(order_payments_df, on='order_id', how='left')
 
-#product category name translation
-product_category_tl_df['product_category_name'] = product_category_tl_df['product_category_name'].astype('string')
-product_category_tl_df['product_category_name_english'] = product_category_tl_df['product_category_name_english'].astype('string')
+# product category name translation
+product_category_tl_df['product_category_name'] = product_category_tl_df['product_category_name'].astype('str')
+product_category_tl_df['product_category_name_english'] = product_category_tl_df['product_category_name_english'].astype('str')
 
-#products
-products_df['product_category_name'] = products_df['product_category_name'].astype('string')
-products_df['product_name_lenght'] = pd.to_numeric(products_df['product_name_lenght'], errors='coerce')
-products_df['product_name_lenght'] = products_df['product_name_lenght'].astype('Int64')
-products_df['product_description_lenght'] = pd.to_numeric(products_df['product_description_lenght'], errors='coerce')
-products_df['product_description_lenght'] = products_df['product_description_lenght'].astype('Int64')
-products_df['product_photos_qty'] = pd.to_numeric(products_df['product_photos_qty'], errors='coerce')
-products_df['product_photos_qty'] = products_df['product_photos_qty'].astype('Int64')
-products_df['product_weight_g'] = pd.to_numeric(products_df['product_weight_g'], errors='coerce')
-products_df['product_weight_g'] = products_df['product_weight_g'].astype('Int64')
-products_df['product_length_cm'] = pd.to_numeric(products_df['product_length_cm'], errors='coerce')
-products_df['product_length_cm'] = products_df['product_length_cm'].astype('Int64')
-products_df['product_height_cm'] = pd.to_numeric(products_df['product_height_cm'], errors='coerce')
-products_df['product_height_cm'] = products_df['product_height_cm'].astype('Int64')
-products_df['product_width_cm'] = pd.to_numeric(products_df['product_width_cm'], errors='coerce')
-products_df['product_width_cm'] = products_df['product_width_cm'].astype('Int64')
-# Memperbaiki naming pada kolom
+# products
+products_df['product_category_name'] = products_df['product_category_name'].astype('str')
+products_df['product_name_lenght'] = pd.to_numeric(products_df['product_name_lenght'], errors='coerce').fillna(0).astype('int64')
+products_df['product_description_lenght'] = pd.to_numeric(products_df['product_description_lenght'], errors='coerce').fillna(0).astype('int64')
+products_df['product_photos_qty'] = pd.to_numeric(products_df['product_photos_qty'], errors='coerce').fillna(0).astype('int64')
+products_df['product_weight_g'] = pd.to_numeric(products_df['product_weight_g'], errors='coerce').fillna(0).astype('int64')
+products_df['product_length_cm'] = pd.to_numeric(products_df['product_length_cm'], errors='coerce').fillna(0).astype('int64')
+products_df['product_height_cm'] = pd.to_numeric(products_df['product_height_cm'], errors='coerce').fillna(0).astype('int64')
+products_df['product_width_cm'] = pd.to_numeric(products_df['product_width_cm'], errors='coerce').fillna(0).astype('int64')
 products_df.rename(columns={
     'product_name_lenght': 'product_name_length',
     'product_description_lenght': 'product_description_length'
 }, inplace=True)
-# Drop row yang punya nilai null
 products_df.dropna(subset=['product_weight_g', 'product_length_cm', 'product_height_cm', 'product_width_cm'], axis=0, inplace=True)
-# Reset index
 products_df.reset_index(drop=True, inplace=True)
-# Mengisi kategori nama yang kosong menjadi 'Unknown'
 products_df['product_category_name'] = products_df['product_category_name'].fillna('Unknown')
 
-#sellers
-sellers_df['seller_zip_code_prefix'] = pd.to_numeric(sellers_df['seller_zip_code_prefix'], errors='coerce')
-sellers_df['seller_zip_code_prefix'] = sellers_df['seller_zip_code_prefix'].astype('Int64')
-sellers_df['seller_city'] = sellers_df['seller_city'].astype('string')
-sellers_df['seller_state'] = sellers_df['seller_state'].astype('string')
+# sellers
+sellers_df['seller_zip_code_prefix'] = pd.to_numeric(sellers_df['seller_zip_code_prefix'], errors='coerce').fillna(0).astype('int64')
+sellers_df['seller_city'] = sellers_df['seller_city'].astype('str')
+sellers_df['seller_state'] = sellers_df['seller_state'].astype('str')
+
 
 # Sidebar for navigation
 st.sidebar.title("Navigasi")
